@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="./css/main.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/jsviews.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.corner.js"></script>
+		<script type="text/javascript" src="./js/common.js"></script>
+		<script type="text/javascript" src="./js/diary.js"></script>
+		<title>プチ日記</title>
+		<script id="tmpl" type="text/x-jsrender">
+			<div id="comment">
+			{^{for comments}}
+				{{if #index > 0}}
+				<hr class="comDiv" />
+				{{/if}}
+				<div id="date_{{:head}}" class="comFlame">
+					<div class="comHead">{{:head}}</div>
+					<div class="comBody">
+						<p>{{:body}}</p>
+					</div>
+					<div class="comImage">
+						{{if image}}
+						<img src="./images/diary/{{:image}}" alt="{{:image}}" width="{{:imageWidth}}" height="{{:imageHeight}}" />
+						{{/if}}
+				  </div>
+					<div class="comFoot">{^{:foot}}</div>
+				</div>
+		  {{else}}
+			<span>日記がありません。</span>
+			{{/for}}
+			</div>
+		</script>
+	</head>
+	<body id="page_diary">
+
+		<div id="outer">
+			<div id="left">
+				<div id="calendar"></div>
+				<div id="backLink">
+					<span><a href="./" >トップに戻る</a></span>
+				</div>
+			</div>
+			<div id="right">
+				<div id="diary"></div>
+			</div>
+			<div class="clear"></div>
+			<!-- Copyright -->
+			<div id="copyright">
+				<span>Copyright(C) 2015 Elie All Rights Reserved.</span>
+			</div>
+		</div>
+
+</body>
+</html>
