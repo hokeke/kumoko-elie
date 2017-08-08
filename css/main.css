@@ -42,6 +42,13 @@
     color: inherit;
 }
 
+.thumb-image {
+    height: 200px;
+}
+.thumb-image img {
+    width: 100%;
+    box-sizing: border-box;
+}
 .thumbnail {
     height: 400px;
 }

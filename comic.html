@@ -25,14 +25,23 @@
                 {^{for comics}}
                 <div class="col-xs-6 col-md-3">
                     <div class="thumbnail">
-                        <img src="images/comic/{{:id}}/thumb.png" alt="{{:title}}" />
+                        <div class="thumb-image">
+                            <img src="images/comic/{{:id}}/thumb.png" alt="{{:title}}" />
+                        </div>
                         <div class="caption" id="title_{{:id}}">
                             <h3>{{:title}}</h3>
+                            <div class="list-group">
+                                {^{for episodes}}
+                                <a class="episode font3 list-group-item" href="{{:url}}" target="blank">{{:episode}}話</a>
+                                {{/for}}
+                            </div>
+                            <!--
                             <ul>
                                 {^{for episodes}}
                                 <li><a class="episode font3" href="{{:url}}" target="blank">{{:episode}}話</a></li>
                                 {{/for}}
                             </ul>
+                            -->
                         </div>
                     </div>
                 </div>
