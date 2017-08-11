@@ -42,6 +42,7 @@
     color: inherit;
 }
 
+/*
 .thumb-image {
     height: 200px;
 }
@@ -51,6 +52,10 @@
 }
 .thumbnail {
     height: 400px;
+}
+*/
+.thumbnail img {
+    width: 100%;
 }
 
 
