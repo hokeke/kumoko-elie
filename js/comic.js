@@ -44,17 +44,17 @@ $(function() {
 	})(window.navigator.userAgent.toLowerCase());
 
 	if (_ua.Tablet || _ua.Mobile) { //モバイル端末からのアクセス
-		if (mode != "#mobi" && localStorage.getItem("pc_flag") != "true") {
+		//if (mode != "#mobi" && localStorage.getItem("pc_flag") != "true") {
+		if (mode != "#mobi") {
 			mode = "#mobi";
 			location.href = location.href + "#mobi"
 		}
 	} else { //モバイル端末以外からのアクセス
 		if (mode == "#mobi") {
-			location.href = location.href.split("#")[0];
+			//location.href = location.href.split("#")[0];
 		}
 	}
 
-	//$.fn.viewComic = function(url) {
 	$.fn.viewComic = function(title, episode) {
 		currentPage = 0;
 		maxPage = 0;
@@ -143,10 +143,13 @@ $(function() {
 					width : "100%"
 				});
 
+            /*
 			var dummy = {dummy : "dummy"};
 			$.observable(dummy).setProperty("dummy", dummy);
 			var template = $.templates("#tmplSlide");
+            console.log(template);
 			template.link("div.mangaView", dummy);
+            */
 
 			var openPhotoSwipe = function() {
 				var pswpElement = document.querySelectorAll('.pswp')[0];
@@ -154,6 +157,7 @@ $(function() {
 				// build items array
 				var items = [];
 				while (prePage <= maxPage) {
+                    console.log(baseUrl + (maxPage - (prePage) + 1) + ext);
 					items.push({
 						src : baseUrl + (maxPage - (prePage++) + 1) + ext,
 						w : Math.max(imageWidth, 800),
@@ -173,6 +177,7 @@ $(function() {
 					hideAnimationDuration: 0
 				};
 
+                $(".pswp").css({display: "block"});
 				var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
 				gallery.init();
 			};
@@ -447,6 +452,7 @@ $(function() {
             console.log(e.message);
         }
 
+        /*
 		if (mode == "#mobi") {
 			$("#toggle").css("display", "none");
 			$("#sideMenu").css({
@@ -474,6 +480,7 @@ $(function() {
 			//	anchorToPcInSp : "#anchorToPcInSp"
 			//});
 		} else {
+        */
 			$("#sideMenu .font2").css({
 				fontSize: 14 
 			});
@@ -490,7 +497,7 @@ $(function() {
 			//	spLinkBlockInPc : "#spLinkBlockInPc" ,
 			//	anchorToPcInSp : "#anchorToPcInSp"
 			//});
-		}
+		//}
 
 		$("img#toggle").attr({
 			src : "./images/btn_hide.png",
@@ -551,9 +558,15 @@ $(function() {
 					//		);
 					//toggleSideMenu({
 					//	cbFnc : function(){
+                    if (mode != "#mobi") {
 							$.blockUI({message:"<h1>読み込み中...</h1>"});
 							$("#main").viewComic(title, episode);
 							loadPage();
+                        $("#comicModal").modal('toggle');
+                    }
+                    else {
+							$("#comicSlide").viewComic(title, episode);
+                    }
 					//	}
 					//});
 
@@ -588,7 +601,6 @@ $(function() {
 					//$("#main").show().viewComic(title, episode);
 
                     //$("#modalButton").click(); //TODO
-                    $("#comicModal").modal('toggle');
 
 					return false;
 				}
@@ -614,7 +626,7 @@ $(function() {
 
   //$.blockUI({message:"<h1>読み込み中...</h1>"});
 	$("div#sideMenu").show().viewSideMenu();
-	$("div#main").show().viewComic();
+	//$("div#main").show().viewComic();
 	//loadPage();
 
 });

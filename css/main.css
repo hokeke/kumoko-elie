@@ -12,6 +12,8 @@
     width: 100%;
     position: relative;
     */
+    position: relative;
+    top: 70px;
 }
 
 .modal-dialog {

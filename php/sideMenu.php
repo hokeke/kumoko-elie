@@ -28,7 +28,7 @@ if ($files) {
 			foreach ($files2 as $file2) {
 				$name2 = basename($file2);
 				
-				if ($name2 == 'title.txt' || $name2 == 'Thumbs.db' || $name2 == 'thumb.png') {
+                if ($name2 == 'title.txt' || $name2 == 'Thumbs.db' || preg_match('/.*^thumb\./', $name2)) {
 					continue;
 				}
 

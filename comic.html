@@ -10,28 +10,48 @@
                 </div>
             </div>
         </div>
+        <div id="comicSlide" style="display:none">
+        </div>
     <!--<div id="main"></div>-->
 	<script id="tmpl" type="text/x-jsrender">
+        <!--
 		<img id="toggle" src="" alt="" />
+        -->
+        <!--
 		<div id="spLinkBlockInPc">
 			<a href="./comic.html#mobi" id="anchorToSpInPc">モバイル表示</a>
 		</div>
 		<div id="pcLinkBlockInSp">
 			<a class="font3" href="./comic.html" id="anchorToPcInSp">PC表示</a>
-		</div>
+        </div>
+        -->
 		<div id="comicOut">
 			<h4 class="font1">作品一覧</h4>
             <div class="row">
                 {^{for comics}}
-                <div class="col-xs-6 col-md-3">
+                <div class="col-xs-12 col-md-4">
                     <div class="thumbnail">
-                        <img src="images/comic/{{:id}}/thumb.png" alt="{{:title}}" />
+                        <img src="images/comic/{{:id}}/thumb.jpg" alt="{{:title}}" />
                         <div class="caption" id="title_{{:id}}">
-                            <h3>{{:title}}</h3>
-                            <div class="list-group">
+                            <div class="panel panel-default">
+                                {{if episodes.length > 1}}
+                                <div class="panel-heading panel-toggle collapsed" data-toggle="collapse" href="#title{{>#getIndex()}}">{{:title}}</div>
+                                {{else}}
+                                <div class="panel-heading">{{:title}}</div>
+                                {{/if}}
                                 {^{for episodes}}
-                                <a class="episode font3 list-group-item" href="{{:url}}" target="blank">{{:episode}}話</a>
-                                {{/for}}
+                                {{if #index == 0 }}
+                                <ul class="list-group">
+                                    <a class="episode font3 list-group-item" href="{{:url}}" target="blank">{{:episode}}話</a>
+                                </ul>
+                                <div id="title{{>#parent.index}}" class="panel-collapse collapse">
+                                    <ul class="list-group">
+                                        {{else}}
+                                        <a class="episode font3 list-group-item" href="{{:url}}" target="blank">{{:episode}}話</a>
+                                        {{/if}}
+                                        {{/for}}
+                                    </ul>
+                                </div>
                             </div>
                             <!--
                             <ul>
@@ -56,52 +76,58 @@
             </div>
         </div>
 	</script>
-		<!-- Root element of PhotoSwipe. Must have class pswp. -->
-		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true" style="display:none;">
-				<!-- Background of PhotoSwipe. 
-						 It's a separate element, as animating opacity is faster than rgba(). -->
-				<div class="pswp__bg"></div>
-				<!-- Slides wrapper with overflow:hidden. -->
-				<div class="pswp__scroll-wrap">
-						<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
-						<div class="pswp__container">
-								<!-- don't modify these 3 pswp__item elements, data is added later on -->
-								<div class="pswp__item"></div>
-								<div class="pswp__item"></div>
-								<div class="pswp__item"></div>
-						</div>
-						<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-						<div class="pswp__ui pswp__ui--hidden">
-								<div class="pswp__top-bar">
-										<!--  Controls are self-explanatory. Order can be changed. -->
-										<div class="pswp__counter"></div>
-										<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-										<!--<button class="pswp__button pswp__button--share" title="Share"></button>-->
-										<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-										<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-										<!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-										<!-- element will get class pswp__preloader--active when preloader is running -->
-										<div class="pswp__preloader">
-												<div class="pswp__preloader__icn">
-													<div class="pswp__preloader__cut">
-														<div class="pswp__preloader__donut"></div>
-													</div>
-												</div>
-										</div>
-								</div>
-								<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-										<div class="pswp__share-tooltip"></div> 
-								</div>
-								<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-								</button>
-								<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-								</button>
-								<div class="pswp__caption">
-										<div class="pswp__caption__center"></div>
-								</div>
-							</div>
-						</div>
-		</div>
+    <!--
+	<script id="tmplSlide" type="text/x-jsrender">
+        -->
+        <!-- Root element of PhotoSwipe. Must have class pswp. -->
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true" style="display:none;">
+            <!-- Background of PhotoSwipe. 
+            It's a separate element, as animating opacity is faster than rgba(). -->
+            <div class="pswp__bg"></div>
+            <!-- Slides wrapper with overflow:hidden. -->
+            <div class="pswp__scroll-wrap">
+                <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+                <div class="pswp__container">
+                    <!-- don't modify these 3 pswp__item elements, data is added later on -->
+                    <div class="pswp__item"></div>
+                    <div class="pswp__item"></div>
+                    <div class="pswp__item"></div>
+                </div>
+                <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                <div class="pswp__ui pswp__ui--hidden">
+                    <div class="pswp__top-bar">
+                        <!--  Controls are self-explanatory. Order can be changed. -->
+                        <div class="pswp__counter"></div>
+                        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                        <!--<button class="pswp__button pswp__button--share" title="Share"></button>-->
+                        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                        <!-- element will get class pswp__preloader--active when preloader is running -->
+                        <div class="pswp__preloader">
+                            <div class="pswp__preloader__icn">
+                                <div class="pswp__preloader__cut">
+                                    <div class="pswp__preloader__donut"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                        <div class="pswp__share-tooltip"></div> 
+                    </div>
+                    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                    </button>
+                    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                    </button>
+                    <div class="pswp__caption">
+                        <div class="pswp__caption__center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--
+    </script>
+    -->
 </div>
 </body>
 </html>

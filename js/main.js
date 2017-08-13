@@ -3,12 +3,12 @@ $(function() {
 
     var scriptMap = {
         'comic.html' : [
-    'js/jsviews.min.js',
-'js/jquery.blockUI.js',
-'js/photoswipe.js',
-'js/photoswipe-ui-default.js',
-'js/comic.js'
-    ]
+            'js/jsviews.min.js',
+            'js/jquery.blockUI.js',
+            'js/photoswipe.js',
+            'js/photoswipe-ui-default.js',
+            'js/comic.js'
+        ]
     };
 
     function loadScript(url) {
@@ -19,10 +19,10 @@ $(function() {
         });
     }
 
-    function loadActivePage(id) {
-        $("#" + id).fadeOut(200, function(){
+    $.fn.loadActivePage = function() {
+        $(this).fadeOut(200, function(){
             var targetUrl = $(".nav li.active a").attr("href");
-            $("#" + id).load(targetUrl + " .page-body" , function() {
+            $(this).load(targetUrl + " .page-body" , function() {
                 var loadProcs = [];
                 if (scriptMap[targetUrl]) {
                     var proc;
@@ -35,16 +35,46 @@ $(function() {
         });
     }
 
+    function setViewPage() {
+        var viewPage = localStorage.getItem('viewPage') || 'index.html';
+        console.log("a.page-load[href='" + viewPage + "']");
+        var $li = $("a.page-load[href='" + viewPage + "']").parent("li");
+        $li.addClass("active");
+        $li.siblings(".active").removeClass("active");
+    }
+
+    $(".navbar-collapse li a.navi").click(function(){
+        $(".navbar-collapse").collapse('hide');
+    });
+
+    $.fn.loadPage = function(url) {
+        console.log(url);
+        localStorage.setItem('viewPage', url);
+        setViewPage();
+        $(this).loadActivePage();
+    }
+
+    $("a.navbar-brand").click(function(){
+        $("#mainContent").loadPage($(this).attr("href"));
+    });
+
     $("a.page-load").parent("li").click(function(){
         if ($(this).hasClass("active")) {
             return false;
         }
-        $(this).siblings(".active").removeClass("active");
-        $(this).addClass("active");
-        loadActivePage("mainContent");
+        $("#mainContent").loadPage($(this).find("a").attr("href"));
         return false;
     });
 
-    loadActivePage("mainContent");
+    //window.onbeforeunload = function(){
+    //    alert("close");
+    //    localStorage.setItem('viewPage', 'index.html');
+    //}
+    $(window).unload(function(){
+        console.log("close");
+    });
+
+    setViewPage();
+    $("#mainContent").loadActivePage();
 
 });
